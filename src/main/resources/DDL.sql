@@ -15,6 +15,7 @@ CREATE TABLE "users" (
                       first_name  VARCHAR NOT NULL,
                       last_name  VARCHAR NOT NULL,
                       user_role VARCHAR NOT NULL DEFAULT 'ROLE_CUSTOMER',
+                      status VARCHAR NOT NULL DEFAULT 'ACTIVE',
                       PRIMARY KEY (id)
 );
 

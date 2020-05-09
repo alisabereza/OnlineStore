@@ -11,8 +11,6 @@ import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -61,7 +59,7 @@ public @Data class UserServiceImpl implements UserService {
         return userRepository.save(entity);
     }
 
-
+    @Override
     public User getByEmail(String email) {
         LOG.debug(String.format("getUser: email=%s", email));
         return userRepository.findByEmail(email)
@@ -72,11 +70,5 @@ public @Data class UserServiceImpl implements UserService {
         String passwordHash = bCryptPasswordEncoder.encode(password);
         user.setPassword(passwordHash);
     }
-
-    public String getUsername() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return auth.getName();
-    }
-
 
 }
