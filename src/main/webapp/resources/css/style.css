@@ -4,7 +4,7 @@ body {
 
 .navbar {
     overflow: hidden;
-    background-color: #333;
+    background-color: lawngreen;
 }
 
 .navbar a {
@@ -42,7 +42,7 @@ body {
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: red;
+    background-color: blueviolet;
 }
 
 .dropdown-content {
@@ -56,7 +56,7 @@ body {
 
 .dropdown-content a {
     float: none;
-    color: black;
+    color: indigo;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
