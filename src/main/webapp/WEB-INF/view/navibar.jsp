@@ -8,7 +8,7 @@
         <div class="dropdown-content">
             <a href="${pageContext.request.contextPath}/manufacturer/showManufacturers">All Manufacturers</a>
             <a href="${pageContext.request.contextPath}/manufacturer/createManufacturer">Create Manufacturer</a>
-            <a href="${pageContext.request.contextPath}/manufacturer/findManufacturer">Find Manufacturer</a>
+            <a href="${pageContext.request.contextPath}/manufacturer/findPage">Find Manufacturer</a>
             <a href="${pageContext.request.contextPath}/manufacturer/editManufacturer">Edit Manufacturer</a>
             <a href="${pageContext.request.contextPath}/manufacturer/deleteManufacturer">Delete Manufacturer</a>
         </div>

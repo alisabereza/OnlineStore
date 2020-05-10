@@ -19,4 +19,5 @@ public @Data class Manufacturer extends BaseEntity {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "manufacturer")
     private Set<Product> products;
+
 }

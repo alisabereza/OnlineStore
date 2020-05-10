@@ -9,7 +9,7 @@ public interface UserService extends BaseService<User> {
 
     User getByEmail(String email);
     List<User> getAll();
-    User getById(UUID id);
+
     void save(User user);
     void delete(UUID id);
     User update(User user);
