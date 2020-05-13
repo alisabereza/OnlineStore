@@ -17,7 +17,9 @@
             <tr>
                 <th>Manufacturer ID</th>
                 <th>Name</th>
-                <th></th>
+                <th>Details</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
             </thead>
             <tbody>
@@ -32,6 +34,14 @@
                     <td>
                         <a href="${pageContext.request.contextPath}/manufacturer/get?id=${manufacturer.id}" class="button"
                            role="button" tabindex="0">Detailed</a>
+                    </td>
+                    <td>
+                        <a href="${pageContext.request.contextPath}/manufacturer/edit/${manufacturer.id}" class="button"
+                           role="button" tabindex="0">Edit</a>
+                    </td>
+                    <td>
+                        <a href="${pageContext.request.contextPath}/manufacturer/delete/${manufacturer.id}" class="button"
+                           role="button" tabindex="0">Delete</a>
                     </td>
                 </tr>
             </c:forEach>

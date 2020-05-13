@@ -1,5 +1,7 @@
 package com.berezovska.store.service.impl;
 
+import com.berezovska.store.controller.exception.ProductAlreadyExistsException;
+import com.berezovska.store.controller.exception.ProductNotExistsException;
 import com.berezovska.store.model.Product;
 import com.berezovska.store.repository.ProductRepository;
 import com.berezovska.store.service.ProductService;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -23,32 +26,43 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getByName(String name) {
-        return null;
+    public List<Product> getByName(String name) {
+        LOG.debug("get Products by name: ");
+        return productRepository.findAll().stream().filter(p -> p.getName().equals(name)).collect(Collectors.toList());
     }
 
     @Override
     public List<Product> getAll() {
-        return null;
+        LOG.debug("All Products: ");
+        return productRepository.findAll();
     }
 
     @Override
     public Product getById(UUID id) {
-        return null;
+        LOG.debug("get Product by ID: ");
+        return productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotExistsException(String.format("Product with id = %s not found", id)));
     }
 
     @Override
     public void save(Product entity) {
+        LOG.debug("Save Product: ");
 
+        if (getByName(entity.getName()).stream().filter(p -> p.getManufacturer().equals(entity.getManufacturer())).findAny().isPresent()) {
+            throw new ProductAlreadyExistsException("Product already exists: " + entity.getName());
+        }
+        productRepository.save(entity);
     }
 
     @Override
     public void delete(UUID id) {
-
+        LOG.debug("Deleting Product: ");
+        productRepository.deleteById(id);
     }
 
     @Override
     public Product update(Product entity) {
-        return null;
+        LOG.debug("Updating Product: ");
+        return productRepository.save(entity);
     }
 }
