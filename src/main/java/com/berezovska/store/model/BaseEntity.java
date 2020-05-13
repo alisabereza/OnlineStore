@@ -16,7 +16,7 @@ public abstract @Data class BaseEntity {
     @GeneratedValue (strategy = GenerationType.AUTO)
     private java.util.UUID id;
 
-    @Override
+   @Override
     public String toString () {
         final StringBuilder sb = new StringBuilder(("BaseEntity{"));
         sb.append("id=").append(id);
