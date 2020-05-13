@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 
 
 @Controller
@@ -82,6 +83,29 @@ public class ManufacturerController {
         }
         model.addAttribute("manufacturer", manufacturer);
         return "manufacturer_details";
+    }
+
+
+    /* It opens the record for the given id in editManufacturer page */
+    @RequestMapping(value="/edit/{id}")
+    public String edit(@PathVariable UUID id, Model model){
+        Manufacturer manufacturer=manufacturerService.getById(id);
+        model.addAttribute("manufacturer", manufacturer);
+        return "editManufacturer";
+    }
+
+    /* It updates record for the given id in editManufacturer */
+    @RequestMapping(value="/editsave",method = RequestMethod.POST)
+    public ModelAndView editsave(@ModelAttribute("manufacturer") Manufacturer manufacturer){
+        manufacturerService.update(manufacturer);
+        return new ModelAndView("redirect:/manufacturer/showManufacturers");
+    }
+
+    /* It deletes record for the given id  and redirects to /show_manufacturers */
+    @RequestMapping(value="/delete/{id}",method = RequestMethod.GET)
+    public ModelAndView delete(@PathVariable java.util.UUID id){
+        manufacturerService.delete(id);
+        return new ModelAndView("redirect:/manufacturer/showManufacturers");
     }
 
     @ModelAttribute("manufacturer")
