@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(path = "/")
+@RequestMapping(path = {"/", "", "/index"})
 public class MainController {
 
     @GetMapping(path = "/")
