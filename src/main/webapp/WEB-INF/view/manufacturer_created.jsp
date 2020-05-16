@@ -8,6 +8,7 @@
 </head>
 <body>
 <c:import url="${contextPath}/WEB-INF/view/navibar.jsp"/>
+<p></p>
 <p align="myform">Manufacturer with name ${name} created</p>
 </body>
 </html>

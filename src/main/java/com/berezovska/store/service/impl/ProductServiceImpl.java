@@ -8,6 +8,7 @@ import com.berezovska.store.service.ProductService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void save(Product entity) {
-        LOG.debug("Save Product: ");
+        LOG.debug("Save Product: " );
 
         if (getByName(entity.getName()).stream().filter(p -> p.getManufacturer().equals(entity.getManufacturer())).findAny().isPresent()) {
             throw new ProductAlreadyExistsException("Product already exists: " + entity.getName());
@@ -55,9 +56,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void delete(UUID id) {
-        LOG.debug("Deleting Product: ");
-        productRepository.deleteById(id);
+
+   // @Modifying
+    //@Query("update Product set manufacturer=null where id = :id; delete from Product p where p.id = :id")
+    public void delete(@Param("id") UUID id) {
+        LOG.debug("Deleting Product: " + id);
+        try {
+            productRepository.deleteById(id);}
+       // System.out.println(productRepository.findById(id).isPresent());}
+
+        catch (ProductNotExistsException e)
+        {
+            LOG.debug(e.getMessage());
+        }
     }
 
     @Override

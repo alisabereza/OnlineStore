@@ -1,13 +1,14 @@
 package com.berezovska.store.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
 
-
+@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @Entity
 @Table (name = "products")
@@ -17,8 +18,8 @@ public @Data class Product extends BaseEntity {
     @Column (name = "price")
     private Double price;
 
-    @ManyToOne (cascade = {CascadeType.PERSIST})
-    @JoinColumn(name = "manufacturer_id")
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "manufacturer_id", nullable = false )
     private Manufacturer manufacturer;
 
     @Override

@@ -10,10 +10,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
     <link href="${contextPath}/resources/css/style.css" rel="stylesheet"/>
+    <link href="${contextPath}/resources/css/common.css" rel="stylesheet"/>
 </head>
 
 <body>
 <c:import url="${contextPath}/WEB-INF/view/navibar.jsp"/>
+<p>                         </p>
 <div class="form-container">
 
     <h1>Edit Manufacturer Details</h1>

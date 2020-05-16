@@ -91,7 +91,7 @@ public class ManufacturerController {
     public String edit(@PathVariable UUID id, Model model){
         Manufacturer manufacturer=manufacturerService.getById(id);
         model.addAttribute("manufacturer", manufacturer);
-        return "editManufacturer";
+        return "edit_manufacturer";
     }
 
     /* It updates record for the given id in editManufacturer */

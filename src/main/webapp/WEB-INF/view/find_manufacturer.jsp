@@ -5,9 +5,11 @@
 <head>
     <title>Find manufacturer</title>
     <link href="${contextPath}/resources/css/style.css" rel="stylesheet"/>
+
 </head>
 <body>
 <c:import url="${contextPath}/WEB-INF/view/navibar.jsp"/>
+<p></p>
 <form action="/manufacturer/find">
     <label>
         <span class="small">Manufacturer Name</span>
@@ -18,5 +20,6 @@
 <c:if test="${not empty error}">
     <p style="color: red">${error}</p>
 </c:if>
+
 </body>
 </html>

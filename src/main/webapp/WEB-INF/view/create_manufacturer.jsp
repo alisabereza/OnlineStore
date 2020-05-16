@@ -3,15 +3,16 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
-    <title>Create Course</title>
+    <title>Create Manufacturer</title>
     <link href="${contextPath}/resources/css/style.css" rel="stylesheet"/>
+
 </head>
 <body>
 <c:import url="${contextPath}/WEB-INF/view/navibar.jsp"/>
 
 <div id="stylized" class="myform">
     <form:form id="form" name="form" method="post" action="createManufacturer" modelAttribute="manufacturer">
-        <h1>Create project form</h1>
+        <h1>Create Manufacturer form</h1>
 
         <label>Manufacturer Name
             <span class="small">Manufacturer Name</span>

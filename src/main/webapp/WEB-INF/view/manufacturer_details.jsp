@@ -47,12 +47,7 @@
         </tr>
         </tbody>
     </table>
-    <div align="left">
-        <a href="${pageContext.request.contextPath}/product/create?manufacturer_id=${manufacturer.id}"
-           class="button"
-           role="button"
-           tabindex="0">Add product</a>
-    </div>
+
 </div>
 </body>
 </html>

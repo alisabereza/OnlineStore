@@ -88,7 +88,8 @@ public class ProductController {
     public String edit(@PathVariable UUID id, Model model){
         Product product = productService.getById(id);
         model.addAttribute("product", product);
-        return "editProduct";
+        model.addAttribute("manufacturers", manufacturerService.getAll());
+        return "edit_product";
     }
 
     /* It updates record for the given id in editProduct */

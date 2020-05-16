@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @Entity
 @Table (name = "manufacturers")
@@ -18,7 +18,7 @@ public @Data class Manufacturer extends BaseEntity {
     @Column (name = "name")
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "manufacturer")
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "manufacturer")
     private Set<Product> products;
 
     @Override
