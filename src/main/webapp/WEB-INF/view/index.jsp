@@ -10,7 +10,7 @@
     <link href="${contextPath}/resources/css/style.css" rel="stylesheet"/>
 </head>
 <body>
-<c:import url="${contextPath}/webapp/WEB-INF/view/navibar.jsp"/>
+<c:import url="${contextPath}/WEB-INF/view/navibar.jsp"/>
 <c:if test="${not empty errors}">
     <c:forEach items="${errors}" var="error">
         <p style="color: red">${error.field} ${error.error}</p>

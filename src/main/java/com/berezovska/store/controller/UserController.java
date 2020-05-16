@@ -1,6 +1,5 @@
 package com.berezovska.store.controller;
 
-import com.berezovska.store.controller.exception.UserAlreadyExistsException;
 import com.berezovska.store.controller.exception.UserNotExistsException;
 import com.berezovska.store.model.User;
 import com.berezovska.store.service.UserService;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -63,24 +63,42 @@ public class UserController {
     }
 
     @PostMapping(path = "/registration")
-    public String registerUser(@ModelAttribute("userForm") @Valid User user, BindingResult result, Model model) {
+    public ModelAndView registerUser(@ModelAttribute("userForm") @Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "registration";
+            return new ModelAndView("redirect:/user/registration");
         }
 
         try {
             userService.save(user);
-        } catch (UserAlreadyExistsException ex) {
-            model.addAttribute("message", "An account for that username already exists.");
-            return "registration";
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
+            return new ModelAndView("redirect:/login");
+        } catch (Exception ex) {
+            model.addAttribute("error", ex.getMessage());
+            return new ModelAndView("redirect:/user/registration");
         }
 
-        return "login";
     }
 
+    /* It opens the record for the given id in edit User page */
+    @RequestMapping(value="/edit/{id}")
+    public String edit(@PathVariable UUID id, Model model){
+        User user = userService.getById(id);
+        model.addAttribute("user", user);
+        return "edit_user";
+    }
+
+    /* It updates record for the given id in editProduct */
+    @RequestMapping(value="/editsave",method = RequestMethod.POST)
+    public ModelAndView editsave(@ModelAttribute("user") User user){
+        userService.update(user);
+        return new ModelAndView("redirect:/user/showUsers");
+    }
+
+    /* It deletes record for the given id  and redirects to /show_products */
+    @RequestMapping(value="/delete/{id}",method = RequestMethod.GET)
+    public ModelAndView delete(@PathVariable java.util.UUID id) {
+        userService.delete(id);
+        return new ModelAndView("redirect:/user/showUsers");
+    }
     @ModelAttribute("userForm")
     public User getDefaultUser() {
         return new User();

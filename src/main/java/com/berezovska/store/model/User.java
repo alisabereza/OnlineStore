@@ -1,6 +1,7 @@
 package com.berezovska.store.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
-
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @NoArgsConstructor
 @Table (name = "users")
