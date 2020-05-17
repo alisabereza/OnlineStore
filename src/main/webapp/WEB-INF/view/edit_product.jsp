@@ -17,7 +17,7 @@
 <div id="stylized" class="myform">
     <form:form id="form" name="form" method="post" action="/product/editsave" modelAttribute="product">
         <h1>Edit Project form</h1>
-
+        <form:hidden path="id"  class="form-control input-sm"/>
         <label>Product Name
             <span class="small">Product Name</span>
         </label>

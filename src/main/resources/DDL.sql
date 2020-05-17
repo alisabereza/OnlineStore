@@ -23,7 +23,7 @@ CREATE TABLE "users" (
 
 CREATE TABLE "manufacturer" (
                                 id     uuid DEFAULT uuid_generate_v4(),
-                                name  VARCHAR NOT NULL,
+                                name  VARCHAR NOT NULL UNIQUE,
                                 PRIMARY KEY (id)
 );
 

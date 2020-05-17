@@ -3,7 +3,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
-    <title>Find manufacturer</title>
+    <title>Find product</title>
     <link href="${contextPath}/resources/css/style.css" rel="stylesheet"/>
 </head>
 <body>

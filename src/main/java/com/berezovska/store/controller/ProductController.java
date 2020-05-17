@@ -1,8 +1,9 @@
 package com.berezovska.store.controller;
 
 import com.berezovska.store.controller.exception.ErrorMessage;
-import com.berezovska.store.controller.exception.ManufacturerAlreadyExistsError;
-import com.berezovska.store.controller.exception.ManufacturerNotExistsException;
+import com.berezovska.store.controller.exception.ProductAlreadyExistsException;
+import com.berezovska.store.controller.exception.ProductNotExistsException;
+import com.berezovska.store.model.Manufacturer;
 import com.berezovska.store.model.Product;
 import com.berezovska.store.service.ManufacturerService;
 import com.berezovska.store.service.ProductService;
@@ -56,28 +57,30 @@ public class ProductController {
             return "create_product";
         }
         try {
+            final Manufacturer manufacturer = manufacturerService.getByName(product.getManufacturer().getName());
+            product.setManufacturer(manufacturer);
             productService.save(product);
             model.addAttribute("name", product.getName());
             return "product_created";
-        } catch (ManufacturerAlreadyExistsError e) {
+        } catch (ProductAlreadyExistsException e) {
 
             model.addAttribute("errors", List.of(new ErrorMessage("", e.getMessage())));
             return "create_product";
         }
     }
 
-    @GetMapping(path = "/findPage")
-    public String showFindUserPage() {
+    @GetMapping(path = "/findProduct")
+    public String showFindProductPage() {
         return "find_product";
     }
 
     @GetMapping(path = "/find")
-    public String findManufacturer(@RequestParam("name") String name, Model model) {
+    public String findProduct(@RequestParam("name") String name, Model model) {
         try {
             List<Product> products = productService.getByName(name);
             model.addAttribute("products", products);
             return "show_products";
-        } catch (ManufacturerNotExistsException e) {
+        } catch (ProductNotExistsException e) {
             model.addAttribute("error", e.getMessage());
             return "find_product";
         }
@@ -93,8 +96,11 @@ public class ProductController {
     }
 
     /* It updates record for the given id in editProduct */
+
     @RequestMapping(value="/editsave",method = RequestMethod.POST)
-    public ModelAndView editsave(@ModelAttribute("product") Product product){
+    public ModelAndView editsave(@ModelAttribute("product") @Valid Product product){
+        final Manufacturer manufacturer = manufacturerService.getByName(product.getManufacturer().getName());
+        product.setManufacturer(manufacturer);
         productService.update(product);
         return new ModelAndView("redirect:/product/showProducts");
     }
