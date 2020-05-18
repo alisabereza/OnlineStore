@@ -6,7 +6,6 @@ import com.berezovska.store.controller.exception.ManufacturerAlreadyExistsError;
 import com.berezovska.store.controller.exception.ManufacturerNotExistsException;
 import com.berezovska.store.model.Manufacturer;
 import com.berezovska.store.service.ManufacturerService;
-import com.berezovska.store.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,17 +22,15 @@ import java.util.UUID;
 @RequestMapping(path = "/manufacturer")
 public class ManufacturerController {
     private ManufacturerService manufacturerService;
-    private ProductService productService;
 
     @Autowired
-    public void setManufacturers(ManufacturerService manufacturerService, ProductService productService) {
+    public void setManufacturers(ManufacturerService manufacturerService) {
         this.manufacturerService = manufacturerService;
-        this.productService = productService;
     }
 
     @GetMapping(path = "/showManufacturers")
     public String showManufacturers(Model model) {
-            model.addAttribute("manufacturers", manufacturerService.getAll());
+        model.addAttribute("manufacturers", manufacturerService.getAll());
         return "show_manufacturers";
     }
 
@@ -74,7 +71,7 @@ public class ManufacturerController {
 
     @GetMapping(path = "/find")
     public String findManufacturer(@RequestParam("name") String name, Model model) {
-        Manufacturer manufacturer  = null;
+        Manufacturer manufacturer = null;
         try {
             manufacturer = manufacturerService.getByName(name);
         } catch (ManufacturerNotExistsException e) {
@@ -86,24 +83,21 @@ public class ManufacturerController {
     }
 
 
-    /* It opens the record for the given id in editManufacturer page */
-    @RequestMapping(value="/edit/{id}")
-    public String edit(@PathVariable UUID id, Model model){
-        Manufacturer manufacturer=manufacturerService.getById(id);
+    @RequestMapping(value = "/edit/{id}")
+    public String edit(@PathVariable UUID id, Model model) {
+        Manufacturer manufacturer = manufacturerService.getById(id);
         model.addAttribute("manufacturer", manufacturer);
         return "edit_manufacturer";
     }
 
-    /* It updates record for the given id in editManufacturer */
-    @RequestMapping(value="/editsave",method = RequestMethod.POST)
-    public ModelAndView editsave(@ModelAttribute("manufacturer") Manufacturer manufacturer){
+    @RequestMapping(value = "/editsave", method = RequestMethod.POST)
+    public ModelAndView editsave(@ModelAttribute("manufacturer") Manufacturer manufacturer) {
         manufacturerService.update(manufacturer);
         return new ModelAndView("redirect:/manufacturer/showManufacturers");
     }
 
-    /* It deletes record for the given id  and redirects to /show_manufacturers */
-    @RequestMapping(value="/delete/{id}",method = RequestMethod.GET)
-    public ModelAndView delete(@PathVariable java.util.UUID id){
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public ModelAndView delete(@PathVariable java.util.UUID id) {
         manufacturerService.delete(id);
         return new ModelAndView("redirect:/manufacturer/showManufacturers");
     }

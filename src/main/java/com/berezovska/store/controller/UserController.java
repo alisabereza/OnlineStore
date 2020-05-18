@@ -87,12 +87,11 @@ public class UserController {
 
 
     @PostMapping(path = "/createUser")
-    public String createUser(@ModelAttribute("userForm")  @Valid User user, BindingResult result, Model model) {
+    public String createUser(@ModelAttribute("userForm") @Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "create_user";
         }
         try {
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!! User is:"+user);
             userService.save(user);
             model.addAttribute("email", user.getEmail());
             return "user_created";
@@ -103,27 +102,25 @@ public class UserController {
         }
     }
 
-    /* It opens the record for the given id in edit User page */
-    @RequestMapping(value="/edit/{id}")
-    public String edit(@PathVariable UUID id, Model model){
+    @RequestMapping(value = "/edit/{id}")
+    public String edit(@PathVariable UUID id, Model model) {
         User user = userService.getById(id);
         model.addAttribute("user", user);
         return "edit_user";
     }
 
-    /* It updates record for the given id in editProduct */
-    @RequestMapping(value="/editsave",method = RequestMethod.POST)
-    public ModelAndView editsave(@ModelAttribute("user") User user){
+    @RequestMapping(value = "/editsave", method = RequestMethod.POST)
+    public ModelAndView editsave(@ModelAttribute("user") User user) {
         userService.update(user);
         return new ModelAndView("redirect:/user/showUsers");
     }
 
-    /* It deletes record for the given id  and redirects to /show_products */
-    @RequestMapping(value="/delete/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable java.util.UUID id) {
         userService.delete(id);
         return new ModelAndView("redirect:/user/showUsers");
     }
+
     @ModelAttribute("userForm")
     public User getDefaultUser() {
         return new User();

@@ -17,7 +17,7 @@ public enum UserStatus {
         return status;
     }
 
-    public static Optional<UserStatus> getUserStatus (String status) {
+    public static Optional<UserStatus> getUserStatus(String status) {
         return Arrays.stream(UserStatus.values())
                 .filter(enumValue -> enumValue.getStatus().equals(status))
                 .findAny();

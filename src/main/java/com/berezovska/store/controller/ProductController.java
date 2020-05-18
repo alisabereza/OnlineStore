@@ -86,28 +86,24 @@ public class ProductController {
         }
     }
 
-    /* It opens the record for the given id in editProduct page */
-    @RequestMapping(value="/edit/{id}")
-    public String edit(@PathVariable UUID id, Model model){
+    @RequestMapping(value = "/edit/{id}")
+    public String edit(@PathVariable UUID id, Model model) {
         Product product = productService.getById(id);
         model.addAttribute("product", product);
         model.addAttribute("manufacturers", manufacturerService.getAll());
         return "edit_product";
     }
 
-    /* It updates record for the given id in editProduct */
-
-    @RequestMapping(value="/editsave",method = RequestMethod.POST)
-    public ModelAndView editsave(@ModelAttribute("product") @Valid Product product){
+    @RequestMapping(value = "/editsave", method = RequestMethod.POST)
+    public ModelAndView editsave(@ModelAttribute("product") @Valid Product product) {
         final Manufacturer manufacturer = manufacturerService.getByName(product.getManufacturer().getName());
         product.setManufacturer(manufacturer);
         productService.update(product);
         return new ModelAndView("redirect:/product/showProducts");
     }
 
-    /* It deletes record for the given id  and redirects to /show_products */
-    @RequestMapping(value="/delete/{id}",method = RequestMethod.GET)
-    public ModelAndView delete(@PathVariable java.util.UUID id){
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public ModelAndView delete(@PathVariable java.util.UUID id) {
         productService.delete(id);
         return new ModelAndView("redirect:/product/showProducts");
     }

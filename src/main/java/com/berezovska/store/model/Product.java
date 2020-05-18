@@ -11,15 +11,16 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @Entity
-@Table (name = "products")
-public @Data class Product extends BaseEntity {
-    @Column (name = "name")
+@Table(name = "products")
+public @Data
+class Product extends BaseEntity {
+    @Column(name = "name")
     private String name;
-    @Column (name = "price")
+    @Column(name = "price")
     private Double price;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn(name = "manufacturer_id", nullable = false )
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manufacturer_id", nullable = false)
     private Manufacturer manufacturer;
 
     @Override
@@ -41,8 +42,9 @@ public @Data class Product extends BaseEntity {
     public UUID getId() {
         return super.getId();
     }
+
     @Override
-    public String toString () {
+    public String toString() {
         final StringBuilder sb = new StringBuilder(("Product{"));
         sb.append(super.toString());
         sb.append(", name=").append(name);

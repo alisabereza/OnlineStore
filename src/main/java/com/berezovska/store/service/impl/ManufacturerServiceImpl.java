@@ -20,8 +20,9 @@ class ManufacturerServiceImpl implements ManufacturerService {
     private static final Logger LOG = LogManager.getLogger(ManufacturerServiceImpl.class);
 
     private ManufacturerRepository manufacturerRepository;
+
     @Autowired
-    public void setRepository (ManufacturerRepository manufacturerRepository) {
+    public void setRepository(ManufacturerRepository manufacturerRepository) {
         this.manufacturerRepository = manufacturerRepository;
     }
 

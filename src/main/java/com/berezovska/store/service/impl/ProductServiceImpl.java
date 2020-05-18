@@ -21,8 +21,9 @@ public class ProductServiceImpl implements ProductService {
     private static final Logger LOG = LogManager.getLogger(ProductServiceImpl.class);
 
     private ProductRepository productRepository;
+
     @Autowired
-    public void setRepository (ProductRepository productRepository) {
+    public void setRepository(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
@@ -47,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void save(Product entity) {
-        LOG.debug("Save Product: " );
+        LOG.debug("Save Product: ");
 
         if (getByName(entity.getName()).stream().filter(p -> p.getManufacturer().equals(entity.getManufacturer())).findAny().isPresent()) {
             throw new ProductAlreadyExistsException("Product already exists: " + entity.getName());
@@ -56,17 +57,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-
-   // @Modifying
-    //@Query("update Product set manufacturer=null where id = :id; delete from Product p where p.id = :id")
     public void delete(@Param("id") UUID id) {
         LOG.debug("Deleting Product: " + id);
         try {
-            productRepository.deleteById(id);}
-       // System.out.println(productRepository.findById(id).isPresent());}
-
-        catch (ProductNotExistsException e)
-        {
+            productRepository.deleteById(id);
+        } catch (ProductNotExistsException e) {
             LOG.debug(e.getMessage());
         }
     }

@@ -18,7 +18,8 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public @Data class UserServiceImpl implements UserService {
+public @Data
+class UserServiceImpl implements UserService {
     private static final Logger LOG = LogManager.getLogger(UserServiceImpl.class);
     @Autowired
     private UserRepository userRepository;
@@ -33,7 +34,7 @@ public @Data class UserServiceImpl implements UserService {
 
     @Override
     public User getById(UUID id) {
-        LOG.debug("getUser: id="+ id);
+        LOG.debug("getUser: id=" + id);
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotExistsException(String.format("User with id = %s not found", id)));
     }
@@ -51,7 +52,7 @@ public @Data class UserServiceImpl implements UserService {
 
     @Override
     public void delete(UUID id) {
-    userRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
 
     @Override
@@ -65,6 +66,7 @@ public @Data class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotExistsException("User not found by specified email"));
     }
+
     @Override
     public void setPassword(User user, String password) {
         String passwordHash = bCryptPasswordEncoder.encode(password);

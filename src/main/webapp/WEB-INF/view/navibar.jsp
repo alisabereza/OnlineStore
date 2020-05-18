@@ -22,17 +22,18 @@
             <a href="${pageContext.request.contextPath}/product/findProduct">Find Product</a>
         </div>
     </div>
+    <security:authorize access="hasRole('ROLE_ADMIN')">
     <div class="dropdown">
         <button class="dropbtn">User
             <i></i>
         </button>
-        <div class="dropdown-content">          <security:authorize access="hasRole('ROLE_ADMIN')">
+        <div class="dropdown-content">
             <a href="${pageContext.request.contextPath}/user/showUsers">Show Users</a>
+            <a href="${pageContext.request.contextPath}/user/createUser">Create User</a>
             <a href="${pageContext.request.contextPath}/user/findPage">Find User</a>
-            </security:authorize>
-
         </div>
     </div>
+    </security:authorize>
     <div>
         <a style="float: right" href="${pageContext.request.contextPath}/logout">Logout</a>
     </div>

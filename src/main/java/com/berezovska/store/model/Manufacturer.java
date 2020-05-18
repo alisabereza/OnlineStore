@@ -1,6 +1,5 @@
 package com.berezovska.store.model;
 
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -13,9 +12,10 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @Entity
-@Table (name = "manufacturers")
-public @Data class Manufacturer extends BaseEntity {
-    @Column (name = "name")
+@Table(name = "manufacturers")
+public @Data
+class Manufacturer extends BaseEntity {
+    @Column(name = "name")
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "manufacturer")
@@ -33,8 +33,9 @@ public @Data class Manufacturer extends BaseEntity {
     public int hashCode() {
         return Objects.hash(name);
     }
+
     @Override
-    public String toString () {
+    public String toString() {
         final StringBuilder sb = new StringBuilder(("Manufacturer{"));
         sb.append(super.toString());
         sb.append(", name=").append(getName());
