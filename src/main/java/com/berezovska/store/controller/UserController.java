@@ -1,5 +1,7 @@
 package com.berezovska.store.controller;
 
+import com.berezovska.store.controller.exception.ErrorMessage;
+import com.berezovska.store.controller.exception.UserAlreadyExistsException;
 import com.berezovska.store.controller.exception.UserNotExistsException;
 import com.berezovska.store.model.User;
 import com.berezovska.store.service.UserService;
@@ -76,6 +78,29 @@ public class UserController {
             return new ModelAndView("redirect:/user/registration");
         }
 
+    }
+
+    @GetMapping(path = "/createUser")
+    public String getCreateUserView(Model model) {
+        return "create_user";
+    }
+
+
+    @PostMapping(path = "/createUser")
+    public String createUser(@ModelAttribute("userForm")  @Valid User user, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "create_user";
+        }
+        try {
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!! User is:"+user);
+            userService.save(user);
+            model.addAttribute("email", user.getEmail());
+            return "user_created";
+        } catch (UserAlreadyExistsException e) {
+
+            model.addAttribute("errors", List.of(new ErrorMessage("", e.getMessage())));
+            return "create_user";
+        }
     }
 
     /* It opens the record for the given id in edit User page */
