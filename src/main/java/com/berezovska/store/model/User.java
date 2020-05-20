@@ -9,7 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper=true)
 @Entity
 @NoArgsConstructor
 @Table (name = "users")

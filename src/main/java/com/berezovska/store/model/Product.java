@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
 
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper=true)
 @NoArgsConstructor
 @Entity
 @Table(name = "products")

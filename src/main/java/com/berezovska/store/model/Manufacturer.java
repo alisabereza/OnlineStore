@@ -8,8 +8,7 @@ import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
-
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper=true)
 @NoArgsConstructor
 @Entity
 @Table(name = "manufacturers")
