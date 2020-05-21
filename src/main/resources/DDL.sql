@@ -9,7 +9,6 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE "users" (
                       id     uuid DEFAULT uuid_generate_v4(),
-                      username VARCHAR NOT NULL UNIQUE,
                       password  VARCHAR NOT NULL,
                       email  VARCHAR NOT NULL,
                       first_name  VARCHAR NOT NULL,
@@ -21,13 +20,13 @@ CREATE TABLE "users" (
 
 
 
-CREATE TABLE "manufacturer" (
+CREATE TABLE "manufacturers" (
                                 id     uuid DEFAULT uuid_generate_v4(),
                                 name  VARCHAR NOT NULL UNIQUE,
                                 PRIMARY KEY (id)
 );
 
-CREATE TABLE "product" (
+CREATE TABLE "products" (
                                 id     uuid DEFAULT uuid_generate_v4(),
                                 name  VARCHAR NOT NULL,
                                 price FLOAT NOT NULL,
