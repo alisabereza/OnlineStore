@@ -10,7 +10,7 @@
 <c:import url="${contextPath}/WEB-INF/view/navibar.jsp"/>
 <form action="/user/find">
     <label>
-        <span class="small">User email</span>
+        <span class="emall">User email</span>
         <input type="text" name="email"/>
         <button type="submit" class="button">Find</button>
     </label>
